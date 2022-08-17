@@ -16,6 +16,7 @@ function App() {
           setData(response.data);
           console.log(response.data);
         });
+      setLocation('');
     }
   };
   //sydney coordinates
@@ -28,29 +29,48 @@ function App() {
   const urlLongLat = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   return (
     <div className="app">
+      <div className="search">
+        <input
+          value={location}
+          onChange={(event) => setLocation(event.target.value)}
+          onKeyPress={searchLocation}
+          placeholder="Enter a city"
+          type="text"
+          className="input"
+        />
+      </div>
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>sydney</p>
+            <p>{data.name}</p>
           </div>
           <div className="temp">
-            <h1>28 degrees</h1>
+            {data.main ? <h1>{Math.floor(data.main.temp - 273)} °C</h1> : ''}
           </div>
           <div className="description">
-            <p>Sunny</p>
+            {data.weather ? <p>{data.weather[0].description}</p> : ''}
           </div>
         </div>
         <div className="bottom">
           <div className="feels">
-            <p className="bold">22</p>
+            {data.main ? (
+              <p className="bold">
+                {Math.floor(data.main.feels_like - 273)} °C
+              </p>
+            ) : (
+              ''
+            )}
+
             <p>Feeks like:</p>
           </div>
           <div className="humidity">
-            <p className="bold">20%</p>
+            {data.main ? <p className="bold">{data.main.humidity}</p> : ''}
             <p>Humidity:</p>
           </div>
           <div className="wind">
-            <p className="bold">12mph</p>
+            <p className="bold">
+              {data.wind ? Math.floor(data.wind.speed * 1.6) + ' km/h' : ''}
+            </p>
             <p>Wind:</p>
           </div>
         </div>
