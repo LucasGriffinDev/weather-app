@@ -36,7 +36,7 @@ function App() {
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>{data.name}</p>
+            <p>{data.name ? data.name + ' ' + data.sys.country : ''}</p>
           </div>
           <div className="temp">
             {data.main ? <h1>{Math.floor(data.main.temp)} °C</h1> : ''}

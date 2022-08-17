@@ -1,9 +1,13 @@
 ## Custom Weather Search App in React
 
+Custom weather seach engine for current weather conditions, in any city in the world.
+
 -built with custom Css
 
--search city, and display wether.
+-Built with react.js
 
--mobile first design.
+-node.js npm
 
-link
+-working website:
+
+[link to project](https://lucasgriffindev.github.io/weather-app/)
