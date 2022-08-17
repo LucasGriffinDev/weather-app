@@ -10,7 +10,7 @@ function App() {
     if (event.key === 'Enter') {
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`
         )
         .then((response) => {
           setData(response.data);
@@ -20,13 +20,7 @@ function App() {
     }
   };
   //sydney coordinates
-  let city = 'sydney';
-  let state = 'nsw';
-  let country = 'au';
-  const urlCity = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=5&appid=${apiKey}`;
-  let lat = -33.8688;
-  let lon = 151.2093;
-  const urlLongLat = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
   return (
     <div className="app">
       <div className="search">
@@ -45,7 +39,7 @@ function App() {
             <p>{data.name}</p>
           </div>
           <div className="temp">
-            {data.main ? <h1>{Math.floor(data.main.temp - 273)} °C</h1> : ''}
+            {data.main ? <h1>{Math.floor(data.main.temp)} °C</h1> : ''}
           </div>
           <div className="description">
             {data.weather ? <p>{data.weather[0].description}</p> : ''}
@@ -54,9 +48,7 @@ function App() {
         <div className="bottom">
           <div className="feels">
             {data.main ? (
-              <p className="bold">
-                {Math.floor(data.main.feels_like - 273)} °C
-              </p>
+              <p className="bold">{Math.floor(data.main.feels_like)} °C</p>
             ) : (
               ''
             )}
@@ -69,7 +61,7 @@ function App() {
           </div>
           <div className="wind">
             <p className="bold">
-              {data.wind ? Math.floor(data.wind.speed * 1.6) + ' km/h' : ''}
+              {data.wind ? Math.floor(data.wind.speed) + ' km/h' : ''}
             </p>
             <p>Wind:</p>
           </div>
